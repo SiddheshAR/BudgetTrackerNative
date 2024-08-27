@@ -17,8 +17,10 @@ export default  function HomeScreen() {
   async function getData(){
     const result = await db.getAllAsync<Transaction>(`SELECT * FROM Transactions ORDER BY date DESC;`);
     setTransactions(result);
+    const CategoryResult  = await db.getAllAsync<Category>(`SELECT * FROM Categories;`)
+    setCategories(CategoryResult);
   }
-
+  // console.log(categories);
   useEffect(()=>{
     db.withTransactionAsync(async()=>{
       await getData();
